@@ -1,0 +1,149 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion buildVersion.compileSdkVersion
+
+    repositories {
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
+    defaultConfig {
+        applicationId "com.startedup.base"
+        minSdkVersion appSdk.minSdkVersion
+        targetSdkVersion appSdk.targetSdkVersion
+        versionCode appVersion.versionCode
+        versionName appVersion.versionName
+        vectorDrawables.useSupportLibrary = true
+        resConfigs "en"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "flavor"
+    productFlavors {
+
+        prodFlavour {
+            dimension 'flavor'
+            applicationId "com.startedup.base"
+            buildConfigField("String", "BASE_URL", "\"https://api.nytimes.com/\"")
+            resValue "string", "app_name", "BaseCode"
+        }
+        stagFlavour {
+            dimension 'flavor'
+            applicationId "com.startedup.base.stag"
+            buildConfigField("String", "BASE_URL", "\"yout stage url\"")
+            resValue "string", "app_name", "BaseCodeStag"
+        }
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/layout/activity',
+                    'src/main/res/layout/bottom_sheet',
+                    'src/main/res/layout/dialog',
+                    'src/main/res/layout/fragment',
+                    'src/main/res/layout/include',
+                    'src/main/res/layout/item'
+            ]
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support library
+    implementation deps.supportV7
+    implementation deps.supportDesign
+    implementation deps.supportRecyclerView
+    implementation deps.supportAppCompat
+    implementation deps.supportCardView
+    implementation deps.constraintLayout
+    implementation deps.multiDex
+
+    // Architecture Component
+    implementation deps.navigationFragment
+    implementation deps.navigationUI
+    implementation deps.viewModelLiveData
+    implementation 'com.android.support:support-v4:28.0.0'
+    kapt deps.lifecycleAnnotationProcessor
+    implementation deps.room
+    kapt deps.roomAnnotationProcessor
+
+    // Dagger
+    implementation deps.dagger
+    kapt deps.daggerAnnotationProcessor
+    implementation deps.daggerAndroid
+    implementation deps.daggerSupportLibrary
+    kapt deps.daggerAndroidAnnotationProcessor
+
+    // Retrofit
+    implementation deps.retrofit
+    implementation deps.retrofitRxAdapter
+    implementation deps.gsonConverter
+    implementation deps.gson
+
+    //OkHttp Logger
+    implementation deps.okhttpLoginInterceptor
+
+    // ButterKnife
+    implementation deps.butterKnife
+    annotationProcessor deps.butterKnifeCompiler
+
+    // Google Play Service
+    implementation deps.playServiceLocation
+    implementation deps.playServicesMaps
+
+    // FCM
+    implementation deps.fcmMessaging
+
+    // Database
+    implementation deps.dbFlow
+    annotationProcessor deps.dbFlowProcessor
+    implementation deps.dbFlowCore
+
+    // Database debugging
+    //debugImplementation deps.dbInspector
+
+    // Image loading
+    implementation deps.glide
+    kapt deps.glideCompiler
+
+    // Image compressor
+    implementation deps.zeloryCompressor
+
+    // Image zoom
+    implementation deps.photoView
+
+    // Image crop
+    implementation deps.soundCloudCrop
+
+    // Rx
+    implementation deps.rxJava
+    implementation deps.rxAndroid
+
+    // Other
+    implementation deps.dexterRuntimePermission
+    implementation deps.timber
+    implementation deps.kotlin
+
+}
+repositories {
+    mavenCentral()
+
+}
+
+apply plugin: 'kotlin-android-extensions'

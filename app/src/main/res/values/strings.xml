@@ -1,0 +1,21 @@
+<resources>
+
+
+    <!--Error-->
+    <string name="network_error">No network. Please try again</string>
+    <string name="timeout_error">Taking too long to load data. Please check your network</string>
+    <string name="unknown_error">Something went wrong. Please try again</string>
+
+    <!--Permission-->
+    <string name="permission_denied">Permission denied. Aborting process</string>
+    <string name="permission_permanently_denied">Permission denied. Aborting process</string>git
+    remote
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_show_rationale">Show rationale</string>
+    <string name="permission_needed">You need to enable the permission in myApp setting to use the myApp.</string>
+    <string name="permission_title">Enable permission.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

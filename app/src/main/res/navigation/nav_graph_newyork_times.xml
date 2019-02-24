@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_newyork_times"
+    app:startDestination="@id/timesListFragment">
+    <fragment
+        android:id="@+id/masterFragment"
+        android:name="com.startedup.base.MasterFragment"
+        android:label="fragment_master"
+        tools:layout="@layout/fragment_master" >
+        <action
+            android:id="@+id/action_masterFragment_to_timesListFragment"
+            app:destination="@id/timesListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/timesListFragment"
+        android:name="com.startedup.base.ui.newyorkTimes.TimesListFragment"
+        android:label="fragment_times_list"
+        tools:layout="@layout/master_fragment" >
+        <action
+            android:id="@+id/action_timesListFragment_to_timesDetailsFragment"
+            app:destination="@id/timesDetailsFragment" />
+        <argument
+            android:name="section"
+            app:argType="string"
+            android:defaultValue="science" />
+    </fragment>
+    <fragment
+        android:id="@+id/timesDetailsFragment"
+        android:name="com.startedup.base.ui.newyorkTimes.TimesDetailsFragment"
+        android:label="fragment_times_details"
+        tools:layout="@layout/fragment_times_details" />
+
+</navigation>
