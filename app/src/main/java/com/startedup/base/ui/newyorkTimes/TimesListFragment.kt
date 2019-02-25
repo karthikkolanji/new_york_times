@@ -3,6 +3,7 @@ package com.startedup.base.ui.newyorkTimes
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -38,6 +39,7 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        retainInstance=true
         arguments.let {
             section= it?.getString(ARG_SECTION).toString()
         }
@@ -124,7 +126,6 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
         initData()
     }
     override fun onItemClicked(resultItems: ResultsItem?,transitionView: View) {
-
         replaceFragment(TimesDetailsFragment.newInstance(resultItems),
                 R.id.fragment_container,true,transitionView)
     }
@@ -149,7 +150,4 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
                     }
                 }
     }
-
-
-
 }

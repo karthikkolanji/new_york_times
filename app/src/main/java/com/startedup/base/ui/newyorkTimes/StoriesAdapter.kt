@@ -18,6 +18,8 @@ class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?
                                  ,private val callBacks: CallBacks)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var lastPosition: Int=-1
+
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): RecyclerView.ViewHolder {
 
         return StoriesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_stories,parent,false))
@@ -31,8 +33,6 @@ class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?
         val viewHolder=holder as StoriesViewHolder
         viewHolder.bindViews(position)
     }
-
-    private var lastPosition: Int=-1
 
     internal inner class StoriesViewHolder(itemView: View):
             RecyclerView.ViewHolder(itemView) {
