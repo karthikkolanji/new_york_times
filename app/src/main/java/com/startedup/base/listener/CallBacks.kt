@@ -1,5 +1,6 @@
 package com.startedup.base.listener
 
+import android.view.View
 import com.startedup.base.model.times.ResultsItem
 import com.startedup.base.model.times.TimesStoriesResponse
 
@@ -8,5 +9,5 @@ interface CallBacks{
     fun showLoading(isLoading:Boolean)
     fun showSuccessData(data: TimesStoriesResponse?)
     fun onRetry()
-    fun onItemClicked(resultItems:ResultsItem?)
+    fun onItemClicked(resultItems:ResultsItem?,transitionView: View)
 }

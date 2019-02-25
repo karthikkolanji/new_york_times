@@ -29,7 +29,7 @@ class MyApp : Application(), HasActivityInjector {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         AppInjector.init(this)
-        setupCrashHandler()
+        //setupCrashHandler()
     }
 
     private fun setupCrashHandler() {

@@ -13,8 +13,6 @@ import com.startedup.base.db.typeConverters.ResultsConverters
 @TypeConverters(ResultsConverters::class)
 data class  TimesStoriesResponse (
 
-        @PrimaryKey var id:Int,
-
     @field:SerializedName("copyright")
     var copyright: String? = null,
 
@@ -22,7 +20,7 @@ data class  TimesStoriesResponse (
     var lastUpdated: String? = null,
 
     @field:SerializedName("section")
-    var section: String? = null,
+    @PrimaryKey var section: String,
 
     @field:SerializedName("results")
     var results: List<ResultsItem>? = null,
@@ -34,7 +32,6 @@ data class  TimesStoriesResponse (
     var status: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -44,7 +41,6 @@ data class  TimesStoriesResponse (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
         parcel.writeString(copyright)
         parcel.writeString(lastUpdated)
         parcel.writeString(section)

@@ -18,4 +18,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Transition name -->
+    <string name="iv_image_transition">Image Transition</string>
+    <string name="tv_title_transition">Title Transition</string>
+    <string name="tv_name_transition">Name Transition</string>
+
 </resources>

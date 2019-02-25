@@ -3,6 +3,7 @@ package com.startedup.base.ui.newyorkTimes
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,10 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.startedup.base.R
 import com.startedup.base.api.Status
+import com.startedup.base.constants.IntentExtraConstant
 import com.startedup.base.di.Injectable
 import com.startedup.base.listener.CallBacks
 import com.startedup.base.model.times.ResultsItem
 import com.startedup.base.model.times.TimesStoriesResponse
+import com.startedup.base.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.include_error.*
 import kotlinx.android.synthetic.main.include_loading.*
 import kotlinx.android.synthetic.main.times_list_fragment.*
@@ -23,8 +26,7 @@ import javax.inject.Inject
 
 private const val ARG_SECTION="section"
 
-class TimesListFragment : Fragment(),Injectable,CallBacks {
-
+class TimesListFragment : BaseFragment(),Injectable,CallBacks {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -63,16 +65,6 @@ class TimesListFragment : Fragment(),Injectable,CallBacks {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(section,TimesViewModel::class.java)
 
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-
-        if (!isVisibleToUser){
-            if (viewModel!=null){
-                viewModel=null
-            }
-        }
     }
 
     private fun initData() {
@@ -131,9 +123,20 @@ class TimesListFragment : Fragment(),Injectable,CallBacks {
     override fun onRetry() {
         initData()
     }
-    override fun onItemClicked(resultItems: ResultsItem?) {
+    override fun onItemClicked(resultItems: ResultsItem?,transitionView: View) {
+
+        replaceFragment(TimesDetailsFragment.newInstance(resultItems),
+                R.id.fragment_container,true,transitionView)
+    }
 
 
+    override fun onMultiplePermissionGranted() {
+    }
+    override fun onSinglePermissionGranted() {
+    }
+    override fun onNetworkOn() {
+    }
+    override fun onNetworkOff() {
     }
 
     companion object {
@@ -146,5 +149,7 @@ class TimesListFragment : Fragment(),Injectable,CallBacks {
                     }
                 }
     }
+
+
 
 }

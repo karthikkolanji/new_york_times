@@ -35,7 +35,7 @@ android {
             dimension 'flavor'
             applicationId "com.startedup.base"
             buildConfigField("String", "BASE_URL", "\"https://api.nytimes.com/\"")
-            resValue "string", "app_name", "BaseCode"
+            resValue "string", "app_name", "NewYorkTimes"
         }
         stagFlavour {
             dimension 'flavor'

@@ -1,11 +1,13 @@
 package com.startedup.base.ui.newyorkTimes
 
 import android.annotation.SuppressLint
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.startedup.base.R
 import com.startedup.base.di.module.GlideApp
 import com.startedup.base.listener.CallBacks
@@ -30,32 +32,38 @@ class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?
         viewHolder.bindViews(position)
     }
 
+    private var lastPosition: Int=-1
+
     internal inner class StoriesViewHolder(itemView: View):
             RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("CheckResult")
         fun bindViews(position: Int){
-            var result= resultsItem?.get(position)
+            val result= resultsItem?.get(position)
             try {
-                GlideApp.with(itemView.context).load(result?.multimedia?.get(0)?.url).into(itemView.ivThumb)
+                GlideApp.with(itemView.context).load(result?.multimedia?.get(2)?.url).into(itemView.ivThumb)
             }
             catch (e:Exception){
                 Log.d("multimedia","${e.localizedMessage} exception at position $position")
             }
             itemView.tvArticleTitle.text=result?.title
             itemView.tvAuthorName.text=result?.byline
-            itemView.tvSection.text=result?.section
 
+            enterAnimation(itemView.cvRoot,position)
 
             itemView.setOnClickListener {
                 var result= resultsItem?.get(layoutPosition)
-                callBacks.onItemClicked(result)
+                callBacks.onItemClicked(result,itemView.ivThumb)
             }
         }
 
-
+        private fun enterAnimation(cardView: CardView, position: Int) {
+            if (position > lastPosition) {
+                val animation = AnimationUtils.loadLayoutAnimation(cardView.context,
+                        R.anim.layout_animation_fall_down)
+                cardView.layoutAnimation = animation
+                lastPosition = position
+            }
+        }
     }
-
-
-
 }

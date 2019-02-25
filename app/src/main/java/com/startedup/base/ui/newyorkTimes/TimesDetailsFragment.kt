@@ -1,53 +1,102 @@
 package com.startedup.base.ui.newyorkTimes
 
 
+import android.os.Build
 import android.os.Bundle
+import android.support.transition.TransitionInflater
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.startedup.base.R
+import com.bumptech.glide.request.RequestListener
 import com.startedup.base.di.Injectable
+import com.startedup.base.di.module.GlideApp
+import com.startedup.base.model.times.ResultsItem
+import java.lang.Exception
+import android.graphics.drawable.Drawable
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import android.view.ViewTreeObserver
+import kotlinx.android.synthetic.main.fragment_details.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_RESULT = "result"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TimesDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 class TimesDetailsFragment : Fragment(),Injectable {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var resultDetails: ResultsItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            resultDetails = it.getParcelable(ARG_RESULT)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_times_details, container, false)
+        return inflater.inflate(com.startedup.base.R.layout.fragment_details, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        displayData()
+    }
+
+    private fun displayData() {
+        try {
+            GlideApp.with(ivCoverImage.context).
+                    load(resultDetails?.multimedia?.get(2)?.url)
+                    .centerCrop()
+                    .dontAnimate()
+                    .listener(object :  RequestListener<Drawable> {
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                           scheduleStartPostponedTransition(ivCoverImage)
+                            return false
+                        }
+
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                           //startPostponedEnterTransition()
+                            return true
+                        }
+                    })
+                    .into(ivCoverImage)
+
+        }
+        catch (e:Exception){
+
+        }
+
+        tvTitle.text=resultDetails?.title
+        tvName.text=resultDetails?.byline
+        tvAbstract.text=resultDetails?.jsonMemberAbstract
+        tvPublishDate.text=resultDetails?.publishedDate
+        tvArticleLink.text=resultDetails?.shortUrl
+
+    }
+
+
+    private fun scheduleStartPostponedTransition(sharedElement: View) {
+        sharedElement.viewTreeObserver.addOnPreDrawListener(
+                object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        sharedElement.viewTreeObserver.removeOnPreDrawListener(this)
+                        startPostponedEnterTransition()
+                        return true
+                    }
+                })
     }
 
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(resultItems: ResultsItem?) =
                 TimesDetailsFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putParcelable(ARG_RESULT, resultItems)
                     }
                 }
     }

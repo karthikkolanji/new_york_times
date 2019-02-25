@@ -60,7 +60,7 @@ ext.appVersion = [
 ]
 
 ext.appSdk = [
-        minSdkVersion   : 16,
+        minSdkVersion   : 19,
         targetSdkVersion: 23
 ]
 

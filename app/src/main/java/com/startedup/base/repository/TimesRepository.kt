@@ -32,10 +32,11 @@ class TimesRepository @Inject constructor(private val apiService: ApiService,
             }
 
             override fun shouldFetch(data: TimesStoriesResponse?): Boolean {
-                return data == null  || repoListRateLimit.shouldFetch(section)
+                //return data == null  || repoListRateLimit.shouldFetch(section)
+                return true
             }
 
-            override fun loadFromDb() = timesDao.load()
+            override fun loadFromDb() = timesDao.load(section)
 
             override fun createCall() = apiService.getTopStories(section,ConfigConstant.TIMES_KEY)
 
