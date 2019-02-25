@@ -1,8 +1,6 @@
 package com.startedup.base.di
 
-import com.startedup.base.ui.newyorkTimes.MasterFragment
-import com.startedup.base.ui.newyorkTimes.TimesDetailsFragment
-import com.startedup.base.ui.newyorkTimes.TimesListFragment
+import com.startedup.base.ui.newyorkTimes.*
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

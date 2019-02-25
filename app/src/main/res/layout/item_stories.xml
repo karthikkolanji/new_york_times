@@ -39,6 +39,18 @@
         app:layout_constraintRight_toRightOf="@id/tvArticleTitle"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/tvSection"
+        android:layout_width="0dp"
+        android:textSize="@dimen/tv_medium"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintLeft_toLeftOf="@+id/tvAuthorName"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthorName"
+        app:layout_constraintRight_toRightOf="@id/tvAuthorName"
+        android:layout_height="wrap_content" />
+
     <View
         android:layout_width="0dp"
         app:layout_constraintLeft_toLeftOf="parent"

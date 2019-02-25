@@ -13,6 +13,7 @@ import com.startedup.base.R
 import com.startedup.base.api.Status
 import com.startedup.base.di.Injectable
 import com.startedup.base.listener.CallBacks
+import com.startedup.base.model.times.ResultsItem
 import com.startedup.base.model.times.TimesStoriesResponse
 import kotlinx.android.synthetic.main.include_error.*
 import kotlinx.android.synthetic.main.include_loading.*
@@ -23,6 +24,7 @@ import javax.inject.Inject
 private const val ARG_SECTION="section"
 
 class TimesListFragment : Fragment(),Injectable,CallBacks {
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -53,15 +55,24 @@ class TimesListFragment : Fragment(),Injectable,CallBacks {
 
     private fun initListeners() {
         ivError.setOnClickListener { onRetry() }
+        swipeRefresh.setOnRefreshListener { initData()
+        swipeRefresh.isRefreshing=false}
     }
 
     private fun initViewModel() {
-//        viewModel = activity?.let {
-//            ViewModelProviders.of(it, viewModelFactory).get(TimesViewModel::class.java)
-//        }
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TimesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(section,TimesViewModel::class.java)
 
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+
+        if (!isVisibleToUser){
+            if (viewModel!=null){
+                viewModel=null
+            }
+        }
     }
 
     private fun initData() {
@@ -114,11 +125,15 @@ class TimesListFragment : Fragment(),Injectable,CallBacks {
     }
 
     override fun showSuccessData(data: TimesStoriesResponse?) {
-        recyclerView.adapter=StoriesAdapter(data?.results)
+        recyclerView.adapter=StoriesAdapter(data?.results,this)
     }
 
     override fun onRetry() {
         initData()
+    }
+    override fun onItemClicked(resultItems: ResultsItem?) {
+
+
     }
 
     companion object {

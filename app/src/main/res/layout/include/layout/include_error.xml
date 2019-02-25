@@ -29,7 +29,7 @@
         myApp:layout_constraintLeft_toLeftOf="parent"
         myApp:layout_constraintRight_toRightOf="parent"
         myApp:layout_constraintTop_toBottomOf="@+id/ivError"
-        tools:text="bcjhdsvjdhsvdshvsjdvsdj"
+        tools:text="Error Message"
         />
 
 

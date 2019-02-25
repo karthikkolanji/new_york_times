@@ -44,5 +44,4 @@ class TimesRepository @Inject constructor(private val apiService: ApiService,
             }
         }.asLiveData()
     }
-
 }

@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.startedup.base.R
 import com.startedup.base.di.module.GlideApp
+import com.startedup.base.listener.CallBacks
 import com.startedup.base.model.times.ResultsItem
 import kotlinx.android.synthetic.main.item_stories.view.*
 
-class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?)
+class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?
+                                 ,private val callBacks: CallBacks)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): RecyclerView.ViewHolder {
@@ -42,7 +44,18 @@ class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?)
             }
             itemView.tvArticleTitle.text=result?.title
             itemView.tvAuthorName.text=result?.byline
+            itemView.tvSection.text=result?.section
+
+
+            itemView.setOnClickListener {
+                var result= resultsItem?.get(layoutPosition)
+                callBacks.onItemClicked(result)
+            }
         }
+
+
     }
+
+
 
 }
