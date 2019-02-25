@@ -31,6 +31,6 @@
         android:id="@+id/timesDetailsFragment"
         android:name="com.startedup.base.ui.newyorkTimes.TimesDetailsFragment"
         android:label="fragment_times_details"
-        tools:layout="@layout/fragment_times_details" />
+        tools:layout="@layout/fragment_details" />
 
 </navigation>

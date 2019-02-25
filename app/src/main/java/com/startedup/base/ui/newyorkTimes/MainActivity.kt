@@ -16,7 +16,7 @@ class MainActivity:BaseActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.times_activity)
-        replaceFragment(MasterFragment.newInstance(),R.id.fragment_container,false)
+        //replaceFragment(MasterFragment.newInstance(),R.id.fragment_container,false)
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
