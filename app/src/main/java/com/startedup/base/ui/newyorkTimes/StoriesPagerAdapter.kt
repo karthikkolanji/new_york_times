@@ -8,6 +8,7 @@ class StoriesPagerAdapter(fragmentManager: FragmentManager?)
     :FragmentStatePagerAdapter(fragmentManager){
 
     private val sections= arrayListOf("science","technology","business","world","movies","travel")
+    //private val sections= arrayListOf("science")
 
     override fun getItem(position: Int): Fragment {
         return TimesListFragment.newInstance(sections[position])

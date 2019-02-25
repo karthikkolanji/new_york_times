@@ -33,7 +33,7 @@ class TimesRepository @Inject constructor(private val apiService: ApiService,
 
             override fun shouldFetch(data: TimesStoriesResponse?): Boolean {
                 //return data == null  || repoListRateLimit.shouldFetch(section)
-                return true // for now always fetching api data
+                return true // for now always fetching data from server
             }
 
             override fun loadFromDb() = timesDao.load(section)

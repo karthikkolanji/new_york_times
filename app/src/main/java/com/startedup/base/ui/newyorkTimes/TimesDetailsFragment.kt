@@ -17,7 +17,9 @@ import android.graphics.drawable.Drawable
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import android.view.ViewTreeObserver
+import com.startedup.base.R
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.item_stories.view.*
 
 
 private const val ARG_RESULT = "result"
@@ -28,8 +30,10 @@ class TimesDetailsFragment : Fragment(),Injectable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        postponeEnterTransition()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+            sharedElementEnterTransition = android.transition.TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
         }
         arguments?.let {
             resultDetails = it.getParcelable(ARG_RESULT)
@@ -54,20 +58,23 @@ class TimesDetailsFragment : Fragment(),Injectable {
                     .dontAnimate()
                     .listener(object :  RequestListener<Drawable> {
                         override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                           scheduleStartPostponedTransition(ivCoverImage)
+                            startPostponedEnterTransition()
                             return false
                         }
 
                         override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                           //startPostponedEnterTransition()
-                            return true
+                           startPostponedEnterTransition()
+                            return false
                         }
                     })
                     .into(ivCoverImage)
 
         }
         catch (e:Exception){
-
+            GlideApp.with(ivCoverImage)
+                    .load(R.drawable.im_something_went_wrong)
+                    .centerInside()
+                    .into(ivCoverImage)
         }
 
         tvTitle.text=resultDetails?.title
@@ -76,18 +83,6 @@ class TimesDetailsFragment : Fragment(),Injectable {
         tvPublishDate.text=resultDetails?.publishedDate
         tvArticleLink.text=resultDetails?.shortUrl
 
-    }
-
-
-    private fun scheduleStartPostponedTransition(sharedElement: View) {
-        sharedElement.viewTreeObserver.addOnPreDrawListener(
-                object : ViewTreeObserver.OnPreDrawListener {
-                    override fun onPreDraw(): Boolean {
-                        sharedElement.viewTreeObserver.removeOnPreDrawListener(this)
-                        startPostponedEnterTransition()
-                        return true
-                    }
-                })
     }
 
 

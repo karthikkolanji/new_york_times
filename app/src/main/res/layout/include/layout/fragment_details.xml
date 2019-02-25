@@ -19,7 +19,7 @@
             android:id="@+id/ivCoverImage"
             android:layout_width="0dp"
             android:layout_height="214dp"
-            android:scaleType="centerCrop"
+            android:transitionName="@string/iv_image_transition"
             android:src="@drawable/common_full_open_on_phone"
             myApp:layout_constraintDimensionRatio="w,16:9"
             myApp:layout_constraintLeft_toLeftOf="parent"

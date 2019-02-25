@@ -50,7 +50,7 @@ class FragmentTransactionUtil private constructor() {
             val transaction = fragmentManager.beginTransaction()
             transaction.apply {
                 ViewCompat.getTransitionName(transitionView)?.let { addSharedElement(transitionView, it) }
-                        replace(fragmentContainerId, fragment)
+                replace(fragmentContainerId, fragment)
                 if (addToBackStack) {
                     transaction.addToBackStack(fragment.javaClass.simpleName)
                 }

@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
 
     private lateinit var section:String
 
+    private var mData:TimesStoriesResponse?=null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,20 +50,22 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        initViewModel()
         return inflater.inflate(R.layout.times_list_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         initData()
         initListeners()
     }
 
     private fun initListeners() {
         ivError.setOnClickListener { onRetry() }
-        swipeRefresh.setOnRefreshListener { initData()
-        swipeRefresh.isRefreshing=false}
+        swipeRefresh.setOnRefreshListener {
+            initData()
+        swipeRefresh.isRefreshing=false
+        }
     }
 
     private fun initViewModel() {
@@ -70,29 +75,39 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
     }
 
     private fun initData() {
-        viewModel?.fetchStories(section)?.observe(this, Observer {
 
-            when (it?.status) {
 
-                Status.LOADING -> {
-                    showLoading(true)
-                    showError(false,null)
+        if (mData==null){
+            viewModel?.fetchStories(section)?.observe(this, Observer {
+
+                when (it?.status) {
+
+                    Status.LOADING -> {
+                        showLoading(true)
+                        showError(false,null)
+                    }
+
+
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        showError(false,null)
+                        mData=it.data
+                        showSuccessData(mData)
+                    }
+
+                    Status.ERROR -> {
+                        showLoading(false)
+                        showError(true,it.message)
+                    }
+
                 }
+            })
+        }
+        else{
+            showSuccessData(mData)
+        }
 
 
-                Status.SUCCESS -> {
-                    showLoading(false)
-                    showError(false,null)
-                    showSuccessData(it.data)
-                }
-
-                Status.ERROR -> {
-                    showLoading(false)
-                    showError(true,it.message)
-                }
-
-            }
-        })
     }
 
     override fun showError(isError:Boolean,errorMessage: String?) {
@@ -123,6 +138,7 @@ class TimesListFragment : BaseFragment(),Injectable,CallBacks {
     }
 
     override fun onRetry() {
+        mData=null
         initData()
     }
     override fun onItemClicked(resultItems: ResultsItem?,transitionView: View) {

@@ -30,7 +30,7 @@ class MasterFragment : Fragment(),Injectable {
         storiesPagerAdapter = StoriesPagerAdapter(childFragmentManager)
         viewPager.adapter = storiesPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = 6
+       // viewPager.offscreenPageLimit = 6
     }
 
     companion object {
