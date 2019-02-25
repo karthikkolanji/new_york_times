@@ -10,9 +10,9 @@ import com.startedup.base.model.times.TimesStoriesResponse
 @Dao
 interface TimesDao {
 
-    @Insert
-    abstract fun insert(timesStoriesResponse: TimesStoriesResponse)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+     fun insert(timesStoriesResponse: TimesStoriesResponse)
 
     @Query("SELECT * FROM times_stories_response WHERE section IN(:section) ")
-    abstract fun load(section:String): LiveData<TimesStoriesResponse>
+     fun load(section:String): LiveData<TimesStoriesResponse>
 }

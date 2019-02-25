@@ -41,9 +41,10 @@ class StoriesAdapter constructor(private val resultsItem: List<ResultsItem>?
         fun bindViews(position: Int){
             val result= resultsItem?.get(position)
             try {
-                GlideApp.with(itemView.context).load(result?.multimedia?.get(2)?.url).into(itemView.ivThumb)
+                GlideApp.with(itemView.context).load(result?.multimedia?.get(2)?.url).error(R.drawable.im_something_went_wrong).centerCrop().into(itemView.ivThumb)
             }
             catch (e:Exception){
+                GlideApp.with(itemView.context).load(R.drawable.im_something_went_wrong).centerInside().into(itemView.ivThumb)
                 Log.d("multimedia","${e.localizedMessage} exception at position $position")
             }
             itemView.tvArticleTitle.text=result?.title
