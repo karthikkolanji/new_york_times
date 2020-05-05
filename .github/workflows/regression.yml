@@ -38,8 +38,8 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
-      - name: Build Release APK
-        run: bash ./gradlew assembleProdFlavourDebug
+#      - name: Build Release APK
+#        run: bash ./gradlew assembleProdFlavourDebug
 
       - name: Echo
         run: |
