@@ -74,7 +74,7 @@ jobs:
           ## Optional content type (defaults to text/plain):
           content_type: text/html
           # Optional attachments:
-          attachments: app/build/outputs/apk/prodFlavour/debug/newYorlTimes
+          attachments: /home/runner/work/new_york_times/new_york_times/app/build/outputs/apk/prodFlavour/debug/newYorlTimes
 
 
 
