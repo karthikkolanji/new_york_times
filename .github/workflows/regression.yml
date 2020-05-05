@@ -51,7 +51,7 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: karthik.kolanji90@gmail.conm
+          username: karthik.kolanji90@gmail.com
           password: Google54181
           subject: Github Actions job result
           # Literal body:
