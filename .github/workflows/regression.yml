@@ -46,6 +46,24 @@ jobs:
           echo ${{ steps.branch_name.outputs.branch }}
 
 
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          # Literal body:
+          body: Build job of ${{github.repository}} completed successfully!
+          to: karthik.kolanji90@gmail.com
+          from: karthik Kolanji # <user@example.com>
+          # Optional content type (defaults to text/plain):
+          content_type: text/html
+          # Optional attachments:
+          attachments: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
+
+
 
       # - name: Upload generated mapping file
        # uses: actions/upload-artifact@v2
