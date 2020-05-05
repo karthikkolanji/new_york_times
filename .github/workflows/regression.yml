@@ -74,7 +74,7 @@ jobs:
           ## Optional content type (defaults to text/plain):
           content_type: text/html
           # Optional attachments:
-          attachments: newYorlTimes
+          attachments: app/build/outputs/apk/prodFlavour/debug/newYorlTimes
 
 
 
