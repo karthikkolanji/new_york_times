@@ -105,7 +105,7 @@ jobs:
 
       - name: Slack notification
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_USERNAME: ThisIsMyUsername # Optional. (defaults to webhook app)
           SLACK_CHANNEL: general # Optional. (defaults to webhook)
           SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
