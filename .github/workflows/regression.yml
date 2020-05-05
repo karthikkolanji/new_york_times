@@ -52,11 +52,13 @@ jobs:
           name: newYorlTimes
           path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
+      - run: mkdir app/build/outputs/apk/prodFlavour/artifacts
+
       - name: Download generated .apk file
         uses: actions/download-artifact@v2
         with:
           name: newYorlTimes
-          path: app/build/outputs/apk/prodFlavour/debug/
+          path: app/build/outputs/apk/prodFlavour/artifacts
 
 
       - name: Send mail
@@ -74,7 +76,7 @@ jobs:
           ## Optional content type (defaults to text/plain):
           content_type: text/html
           # Optional attachments:
-          attachments: /home/runner/work/new_york_times/new_york_times/app/build/outputs/apk/prodFlavour/debug/newYorlTimes
+          attachments: app/build/outputs/apk/prodFlavour/artifacts/newYorlTimes
 
 
 
