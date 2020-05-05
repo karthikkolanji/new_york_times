@@ -46,14 +46,14 @@ jobs:
           echo ${{ steps.branch_name.outputs.branch }}
 
 
-      - name: Signing .apk with release key
-        uses: r0adkll/sign-android-release@v1.0.1
-        with:
-          releaseDirectory: app/build/outputs/apk/prodFlavour/release/app-prodFlavour-release.apk
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+#      - name: Signing .apk with release key
+#        uses: r0adkll/sign-android-release@v1.0.1
+#        with:
+#          releaseDirectory: app/build/outputs/apk/prodFlavour/release/app-prodFlavour-release.apk
+#          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+#          alias: ${{ secrets.KEY_ALIAS }}
+#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
 
       - name: Save generated .apk file
