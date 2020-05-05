@@ -76,7 +76,7 @@ jobs:
                 Title ```${{github.event.pull_request.title}}```
                 URL ${{github.event.pull_request.url}}
                 ```${{github.event.pull_request.body}}```
-#          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
+          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
           channel: android_ci_cd_test
 
 
