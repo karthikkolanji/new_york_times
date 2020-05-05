@@ -39,7 +39,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Release APK
-        run: bash ./gradlew assembleProdGoogleRelease
+        run: bash ./gradlew assembleProdFlavourDebug
 
       - name: Echo
         run: |
