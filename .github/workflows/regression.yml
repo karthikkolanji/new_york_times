@@ -51,12 +51,12 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: karthik@okcredit.in
-          password: Okcredit@123
+          username: karthik.kolanji@gmail.con
+          password: Google54181
           subject: Github Actions job result
           # Literal body:
           body: Build job of ${{github.repository}} completed successfully!
-          to: karthik.kolanji90@gmail.com
+          to: karthik@okcredit.in
           from: karthik Kolanji # <user@example.com>
           # Optional content type (defaults to text/plain):
           content_type: text/html
