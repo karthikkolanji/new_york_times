@@ -46,37 +46,39 @@ jobs:
           echo ${{ steps.branch_name.outputs.branch }}
 
 
+      - name: Signing .apk with release key
+        uses: r0adkll/sign-android-release@v1.0.1
+        with:
+          releaseDirectory: app/build/outputs/apk/prodFlavour/release/app-prodFlavour-release.apk
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+
+
       - name: Save generated .apk file
         uses: actions/upload-artifact@v2
         with:
           name: newYorlTimes
-          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
-
-      - run: mkdir app/build/outputs/apk/prodFlavour/artifacts
-
-      - name: Download generated .apk file
-        uses: actions/download-artifact@v2
-        with:
-          name: newYorlTimes
-          path: app/build/outputs/apk/prodFlavour/artifacts
+          path: app/build/outputs/apk/prodFlavour/release/app-prodFlavour-release.apk
 
 
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: karthik.kolanji90@gmail.com
-          password: Google54181
-          subject: Github Actions job result
-          # Literal body:
-          body: Build job of ${{github.repository}} completed successfully!
-          to: karthik@okcredit.in
-          from: karthik.kolanji@gmail.con # <user@example.com>
-          ## Optional content type (defaults to text/plain):
-          content_type: text/html
-          # Optional attachments:
-          attachments: app/build/outputs/apk/prodFlavour/artifacts/newYorlTimes
+#      - name: Send mail
+#        uses: dawidd6/action-send-mail@v2
+#        with:
+#          server_address: smtp.gmail.com
+#          server_port: 465
+#          username: karthik.kolanji90@gmail.com
+#          password: Google54181
+#          subject: Github Actions job result
+#          # Literal body:
+#          body: Build job of ${{github.repository}} completed successfully!
+#          to: karthik@okcredit.in
+#          from: karthik.kolanji@gmail.con # <user@example.com>
+#          ## Optional content type (defaults to text/plain):
+#          content_type: text/html
+#          # Optional attachments:
+#          attachments: app/build/outputs/apk/prodFlavour/artifacts/newYorlTimes
 
 
 

@@ -4,6 +4,14 @@ apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/karthikkolanji/Desktop/newyork/newyork.jks')
+            storePassword 'newyork123'
+            keyAlias = 'newyork'
+            keyPassword 'newyork123'
+        }
+    }
     compileSdkVersion buildVersion.compileSdkVersion
 
     repositories {
@@ -22,9 +30,18 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        debug{
+            debuggable true
+            shrinkResources false
+            minifyEnabled false
+        }
         release {
+            debuggable false
+            debuggable true
+            shrinkResources false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
