@@ -58,7 +58,7 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
           to: karthik@okcredit.in
           from: karthik Kolanji # <user@example.com>
-          # Optional content type (defaults to text/plain):
+          ## Optional content type (defaults to text/plain):
           content_type: text/html
           # Optional attachments:
           attachments: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
