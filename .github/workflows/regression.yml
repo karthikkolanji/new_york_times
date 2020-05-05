@@ -92,11 +92,23 @@ jobs:
 #          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
 
 
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+#      - uses: 8398a7/action-slack@v3
+#        with:
+#          status: ${{ job.status }}
+#          fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
+#        if: always() # Pick up events even if the job fails or is canceled.
+
+
+
+      - name: Slack notification
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: ThisIsMyUsername # Optional. (defaults to webhook app)
+          SLACK_CHANNEL: general # Optional. (defaults to webhook)
+          SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
+        uses: Ilshidur/action-slack@master
+        with:
+          args: 'A new commit has been pushed.' # Optional
