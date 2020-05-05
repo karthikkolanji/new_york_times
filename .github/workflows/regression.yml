@@ -48,24 +48,24 @@ jobs:
       - name: Upload generated .apk file
         uses: actions/upload-artifact@v2
         with:
-          name: merchant-418-2.20.1
-          path: app/build/outputs/apk/prodGoogle/release/merchant-418-2.20.1.apk
+          name: newYorlTimes
+          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
-      - name: Upload generated mapping file
-        uses: actions/upload-artifact@v2
-        with:
-          name: mapping
-          path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
+      # - name: Upload generated mapping file
+       # uses: actions/upload-artifact@v2
+       # with:
+       #   name: mapping
+        #  path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
 
 
-      - name: Download generated .apk file
-        uses: actions/download-artifact@v2
-        with:
-          name: merchant-418-2.20.1
-          path: app/build/outputs/apk/prodGoogle/release/merchant-418-2.20.1.apk
+      #- name: Download generated .apk file
+       # uses: actions/download-artifact@v2
+       # with:
+        #  name: newYorlTimes
+        #  path: app/build/outputs/apk/prodGoogle/release/merchant-418-2.20.1.apk
 
-      - name: Download generated mapping file
-        uses: actions/download-artifact@v2
-        with:
-          name: mapping
-          path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
+     # - name: Download generated mapping file
+     #   uses: actions/download-artifact@v2
+      #  with:
+       #   name: mapping
+       #   path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
