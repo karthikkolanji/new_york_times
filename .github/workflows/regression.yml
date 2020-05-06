@@ -45,7 +45,6 @@ jobs:
         run: |
           echo ${{ steps.branch_name.outputs.branch }}
 
-
 #      - name: Signing .apk with release key
 #        uses: r0adkll/sign-android-release@v1.0.1
 #        with:
