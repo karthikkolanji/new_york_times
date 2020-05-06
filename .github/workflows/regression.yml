@@ -90,7 +90,6 @@ jobs:
         #  path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
 
 
-
       # - name: Download generated mapping file
       #   uses: actions/download-artifact@v2
       #  with:
