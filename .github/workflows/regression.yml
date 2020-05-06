@@ -56,11 +56,11 @@ jobs:
 #          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
 
-      - name: Save generated .apk file
-        uses: actions/upload-artifact@v2
-        with:
-          name: newYorlTimes
-          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
+#      - name: Save generated .apk file
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: newYorlTimes
+#          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
 
 #      - name: Send mail
