@@ -109,6 +109,13 @@ jobs:
           channel: android_ci_cd_test
 
 
+      - name: Upload to Google Drive
+        uses: satackey/action-google-drive@v1
+        with:
+          skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+          upload-from: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
+          upload-to: /release_apks
+
 
 #      - name: Slack Notification
 #        uses: rtCamp/action-slack-notify@v2.0.0
