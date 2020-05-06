@@ -97,7 +97,6 @@ jobs:
       #   name: mapping
       #   path: app/build/outputs/mapping/prodGoogleRelease/mapping.txt
 
-
       - name: Slack uploading
         uses: adrey/slack-file-upload-action@master
         with:
