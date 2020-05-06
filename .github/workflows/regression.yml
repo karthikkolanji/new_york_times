@@ -39,7 +39,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Release APK
-        run: bash ./gradlew assembleProdFlavourRelease
+        run: bash ./gradlew assembleProdFlavourDebug
 
       - name: Echo
         run: |
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: newYorlTimes
-          path: app/build/outputs/apk/prodFlavour/release/app-prodFlavour-release.apk
+          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
 
 #      - name: Send mail
